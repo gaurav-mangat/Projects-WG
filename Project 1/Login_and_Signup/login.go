@@ -2,64 +2,90 @@ package Login_and_Signup
 
 import (
 	ol "FileHandling/On_Login"
-	ab "FileHandling/utils"
+	"FileHandling/utils"
 	"fmt"
+	"log"
+	"strings"
 )
 
 func Login() {
 	const filename = "users.json"
 
+	// Load users from the file once
+	if err := utils.LoadUsers(filename); err != nil {
+		fmt.Printf("Error loading users: %v\n", err)
+		return
+	}
+
 	for {
-		// Load users from the file
-		if err := ab.LoadUsers(filename); err != nil {
-			fmt.Printf("Error loading users: %v\n", err)
+		var username, password string
+		fmt.Println()
+		fmt.Println()
+		fmt.Println("\033[1;36m----------------------------------------------------------------\033[0m") // Sky blue
+		fmt.Println("\033[1;31m                          LOG IN                                \033[0m") // Red bold
+		fmt.Println("\033[1;36m----------------------------------------------------------------\033[0m")
+
+		username = utils.ReadInput("\n             Enter username: ")
+		if strings.Contains(username, " ") {
+			fmt.Println("\033[1;31m            User name is only of one word.\033[0m")
+			fmt.Println("\nPlease try again....")
 			return
 		}
 
-		var username string
+		password = utils.ReadInput("             Enter password: ")
 
-		fmt.Print("\n\nEnter username  : ")
-		fmt.Scan(&username)
-
-		var password string
-		fmt.Print("Enter password: ")
-		fmt.Scan(&password)
+		if strings.Contains(password, " ") {
+			fmt.Println("\033[1;31mP\nassword doesn't contain any spaces.\033[0m")
+			fmt.Println("\nPlease try again....")
+			return
+		}
+		fmt.Println()
 
 		// Check credentials
 		loginSuccessful := false
-		for _, user := range ab.Users {
-			if user.Username == username && ab.CheckPasswordHash(password, user.PasswordHash) {
-				fmt.Println("Login successful!")
+		for _, user := range utils.Users {
+			if user.Username == username && utils.CheckPasswordHash(password, user.PasswordHash) {
+				fmt.Println("\033[1;31m              Login successful!\033[0m") // Red bold
 				loginSuccessful = true
+				ol.ActiveUser = user
+				ol.Dashboard(user)
+				fmt.Println()
 				break
 			}
 		}
 
 		if loginSuccessful {
-			ol.LoggedInMenu() // Calling the function LoggedInMenu() after successful login
-		}
-
-		fmt.Println("Login failed. Please check your username and password.")
-
-		// After unsuccesful login attempt
-
-		fmt.Println("\nWhat would you like to do next?")
-		fmt.Println("1. Retrying LogIn")
-		fmt.Println("2. Sign up")
-		fmt.Println("3. Exit")
-		var choice int
-		fmt.Print("Enter your choice: ")
-		fmt.Scan(&choice)
-		if choice == 1 {
-			Login()
-		} else if choice == 2 {
-			SignUp() // Call the SignUp function
-		} else if choice == 3 {
-			fmt.Println("Exiting...")
-			return // Exit the function to end the program
+			// Successful login, exit the loop
+			break
 		} else {
-			fmt.Println("Invalid choice. Exiting...")
-			return
+			// Failed login, prompt the user
+			log.Println("Login failed. Please check your username and password.")
+
+			fmt.Println("\nWhat would you like to do next?")
+			fmt.Println("1. Retry Login")
+			fmt.Println("2. Sign up")
+			fmt.Println("3. Exit")
+			var choice int
+			fmt.Print("Enter your choice: ")
+			fmt.Scan(&choice)
+
+			switch choice {
+			case 1:
+				// Retry login
+				continue
+			case 2:
+				// Call the SignUp function
+				SignUp()
+				return // Return to avoid retrying after sign up
+			case 3:
+				// Exit
+				fmt.Println("Exiting...")
+				return
+			default:
+				// Invalid choice
+				fmt.Println("Invalid choice. Exiting...")
+				return
+			}
 		}
 	}
 }

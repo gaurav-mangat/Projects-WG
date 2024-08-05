@@ -7,24 +7,31 @@ import (
 
 func main() {
 	for {
-		// Message to the user
-		fmt.Println("\n\nPress 1 to Login")
-		fmt.Println("----------------------")
-		fmt.Println("Press 2 to SignUp")
-		fmt.Println("----------------------")
-		fmt.Println("Press 3 to exit")
-		fmt.Println()
+		// Welcome message with ASCII art
+		fmt.Println("\033[1;36m") // Cyan bold
+		fmt.Println("===================================")
+		fmt.Println("     WELCOME TO OUR APPLICATION    ")
+		fmt.Println("===================================")
+		fmt.Println("\033[0m") // Reset color
+
+		// Menu options with borders and colors
+		fmt.Println("\033[1;32m") // Green bold
+		fmt.Println("-----------------------------")
+		fmt.Println("      Press 1 to Login")
+		fmt.Println("-----------------------------")
+		fmt.Println("      Press 2 to SignUp")
+		fmt.Println("-----------------------------")
+		fmt.Println("      Press 3 to Exit")
+		fmt.Println("-----------------------------")
+		fmt.Println("\033[0m") // Reset color
 
 		var choice int
 
-		// Using fmt.Scanln to read an integer input
-		fmt.Print("Enter your choice: ")
+		// Prompt user for choice with color
+		fmt.Print("\033[1;34m     Enter your choice: \033[0m") // Blue bold
 		_, err := fmt.Scanln(&choice)
 		if err != nil {
-			fmt.Println("Error reading input:", err)
-			// Clear the buffer
-			var discard string
-			fmt.Scanln(&discard)
+			fmt.Println("\033[1;31m     Error reading input:", err, "\033[0m") // Red bold
 			continue
 		}
 
@@ -33,26 +40,23 @@ func main() {
 			li.Login()
 		case 2:
 			var year int
-			fmt.Print("Enter your birth year: ")
+			fmt.Print("\033[1;34m\n     Enter your birth year: \033[0m") // Blue bold
 			_, err := fmt.Scanln(&year)
 			if err != nil {
-				fmt.Println("Error reading input:", err)
-				// Clear the buffer
-				var discard string
-				fmt.Scanln(&discard)
+				fmt.Println("\033[1;31m     Error reading input:", err, "\033[0m") // Red bold
 				continue
 			}
-			if year < 2004 {
-				fmt.Println("You are eligible to sign up\n")
+			if year < 2004 && year > 1910 {
+				fmt.Println("\033[1;33m\n\n     Hurray! You are eligible to sign up 😃😃\n\033[0m") // Yellow bold
 				li.SignUp()
 			} else {
-				fmt.Println("You are too young for this.....")
+				fmt.Println("\033[1;31m\n\n     Sorry! You are not eligible for SignUp \033[0m") // Red bold
 			}
 		case 3:
-			fmt.Println("Successfully exited the program....")
+			fmt.Println("\033[1;32m\n  Successfully exited the program....\033[0m") // Green bold
 			return
 		default:
-			fmt.Println("\nInvalid choice")
+			fmt.Println("\033[1;31m\n     Invalid choice\033[0m") // Red bold
 		}
 	}
 }

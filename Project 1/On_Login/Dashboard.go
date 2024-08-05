@@ -1,26 +1,36 @@
 package On_Login
 
 import (
+	"FileHandling/models"
 	a "FileHandling/utils"
 	"fmt"
 	"strconv"
 )
 
-func LoggedInMenu() {
+var ActiveUser models.User
+
+func Dashboard(activeUser models.User) {
 	for {
-		fmt.Println("\n\nPress 1 to Add Daily Status")
-		fmt.Println("----------------------")
-		fmt.Println("Press 2 to Manage To-Do List")
-		fmt.Println("----------------------")
-		fmt.Println("Press 3 to Check Course Progress")
-		fmt.Println("----------------------")
-		fmt.Println("Press 4 to Logout")
+		// User Dashboard
+		fmt.Println()
+		fmt.Println("\033[1;36m---------------------------------------------\033[0m")  // Sky blue
+		fmt.Println("\033[1;32m                DASHBOARD                     \033[0m") // Green
+		fmt.Println("\033[1;36m---------------------------------------------\033[0m")  // Sky blue
+		fmt.Println("\n\033[1;34mPress 1 to go into Daily Status section\033[0m")
+		fmt.Println("\033[1;36m------------------------------\033[0m") // Sky blue
+		fmt.Println("\033[1;34mPress 2 to Manage To-Do List\033[0m")
+		fmt.Println("\033[1;36m------------------------------\033[0m") // Sky blue
+		fmt.Println("\033[1;34mPress 3 to Check Course Progress\033[0m")
+		fmt.Println("\033[1;36m------------------------------\033[0m") // Sky blue
+		fmt.Println("\033[1;34mPress 4 to Logout\033[0m")
 		fmt.Println()
 
-		choiceStr := a.ReadInput("Enter your choice: ")
-		choice, err := strconv.Atoi(choiceStr)
+		var choice int
+		fmt.Print("Enter your choice: ")
+		_, err := fmt.Scan(&choice)
+
 		if err != nil {
-			fmt.Println("Invalid choice. Please enter a number.")
+			fmt.Println("Error reading input.")
 			continue
 		}
 

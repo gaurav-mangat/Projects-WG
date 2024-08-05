@@ -1,0 +1,58 @@
+[
+    {
+        "username": "yusuf",
+        "password_hash": "$2a$10$5ZCKRUOlRRHtcoeGA16s/eVEwTxAAhQHwZPk65SCb6BAAqYqS8fyO",
+        "full_name": "yusuf pathan",
+        "mobile_number": "8999999999",
+        "gender": "male"
+    },
+    {
+        "username": "anish",
+        "password_hash": "$2a$10$WcrinfWIR0Xd5esol3eKCeAEXEuqugOec9aQivumSeXgVWYIdTY1K",
+        "full_name": "anish sharma",
+        "mobile_number": "9999999999",
+        "gender": "male"
+    },
+    {
+        "username": "bhumit11",
+        "password_hash": "$2a$10$cJzLy3sd29Zm8LBn5oD6T.r/t.JwtwoMxtYbxhCJbB.A1anc/UOa6",
+        "full_name": "",
+        "mobile_number": "",
+        "gender": ""
+    },
+    {
+        "username": "bhumit23",
+        "password_hash": "$2a$10$qrZfLQQ6aIYw0CF1tKRr1u/B/EyZ83/7UI46CqwqVx3Q5hmi3p2F.",
+        "full_name": "Bhumit Jain",
+        "mobile_number": "4355353",
+        "gender": "Male"
+    },
+    {
+        "username": "rishabh",
+        "password_hash": "$2a$10$9alEenaN69HewLHWtmJl/.CjSxfTkFCqKkPwLsjxPZTaQTEZa7LDu",
+        "full_name": "",
+        "mobile_number": "734232355",
+        "gender": "Male"
+    },
+    {
+        "username": "Hiffr32324@b",
+        "password_hash": "$2a$10$tyIHvtt79/ynUEEnP53GGObXj8ExadO84vI/aDT3f4/yJLpsZv6JO",
+        "full_name": "Prince",
+        "mobile_number": "95257535853",
+        "gender": "Male"
+    },
+    {
+        "username": "jaswant12",
+        "password_hash": "$2a$10$TRvV3fxfNgIfJYugBlwhseeuwRuVCk4eQIa1FfzAV90xLtd1XcbRu",
+        "full_name": "Jaswant Singh",
+        "mobile_number": "7891180348",
+        "gender": "Male"
+    },
+    {
+        "username": "dushyant",
+        "password_hash": "$2a$10$kr64WSFlbpKFPa6MlfjCousvLX8O7UcCIjQEQ2OnVWGG49L351qQu",
+        "full_name": "Dushyant Bansal",
+        "mobile_number": "78300274483",
+        "gender": "Others"
+    }
+]

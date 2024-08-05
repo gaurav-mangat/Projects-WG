@@ -1,16 +1,21 @@
 package On_Login
 
 import (
-	d "FileHandling/models"
 	a "FileHandling/utils"
 	"encoding/json"
 	"fmt"
 	"os"
-	"time"
 )
 
+// Define the structure for daily status
+
+type DailyStatus struct {
+	Date   string `json:"date"`
+	Status string `json:"status"`
+}
+
 // Define a global variable for daily statuses
-var dailyStatuses []d.DailyStatus
+var dailyStatuses []DailyStatus
 
 // Load daily statuses from JSON file
 func loadDailyStatuses(filename string) error {
@@ -18,7 +23,7 @@ func loadDailyStatuses(filename string) error {
 	if err != nil {
 		if os.IsNotExist(err) {
 			// File does not exist, no statuses to load
-			dailyStatuses = []d.DailyStatus{}
+			dailyStatuses = []DailyStatus{}
 			return nil
 		}
 		return err
@@ -46,21 +51,14 @@ func AddDailyStatus() {
 		fmt.Printf("Error loading daily statuses: %v\n", err)
 		return
 	}
-	date := time.Now().Format("2006-01-02")
-	//date := a.ReadInput("Enter date (YYYY-MM-DD): ")
+
+	date := a.ReadInput("Enter date (YYYY-MM-DD): ")
 	status := a.ReadInput("Enter daily status: ")
 
-	data := d.DailyStatus{
-		Username: ActiveUser.Username,
-		Status: []struct {
-			Date        string `json:"date"`
-			DailyStatus string `json:"dailyStatus"`
-		}{
-			{Date: date, DailyStatus: status},
-		},
-	}
-
-	dailyStatuses = append(dailyStatuses, data)
+	dailyStatuses = append(dailyStatuses, DailyStatus{
+		Date:   date,
+		Status: status,
+	})
 
 	if err := saveDailyStatuses(filename); err != nil {
 		fmt.Printf("Error saving daily statuses: %v\n", err)

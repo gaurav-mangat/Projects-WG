@@ -1,6 +1,7 @@
-package function
+package utils
 
 import (
+	"FileHandling/models"
 	"bufio"
 	"encoding/json"
 	"fmt"
@@ -10,26 +11,20 @@ import (
 	"strings"
 )
 
-// Define the user structure with additional fields
+// User represents the user structure with additional fields.
 
-type User struct {
-	Username     string `json:"username"`
-	PasswordHash string `json:"password_hash"` // Store hashed password
-	FullName     string `json:"full_name"`
-	MobileNumber string `json:"mobile_number"`
-	Gender       string `json:"gender"`
-}
-
-// Define a global variable for user storage
-
-var Users []User
+// Global variable for user storage
+var Users []models.User
 
 // Create a buffered reader
+var Reader *bufio.Reader
 
-var Reader = bufio.NewReader(os.Stdin)
+// Initialize the Reader in the init function
+func init() {
+	Reader = bufio.NewReader(os.Stdin)
+}
 
-// Read input from user with prompt
-
+// ReadInput reads input from the user with a prompt.
 func ReadInput(prompt string) string {
 	fmt.Print(prompt)
 	input, err := Reader.ReadString('\n')
@@ -40,14 +35,13 @@ func ReadInput(prompt string) string {
 	return strings.TrimSpace(input)
 }
 
-// Load users from JSON file
-
+// LoadUsers loads users from a JSON file.
 func LoadUsers(filename string) error {
 	file, err := os.ReadFile(filename)
 	if err != nil {
 		if os.IsNotExist(err) {
 			// File does not exist, no users to load
-			Users = []User{}
+			Users = []models.User{}
 			return nil
 		}
 		return err
@@ -55,22 +49,20 @@ func LoadUsers(filename string) error {
 
 	// Check if the file is empty
 	if len(file) == 0 {
-		Users = []User{}
+		Users = []models.User{}
 		return nil
 	}
 
 	// Try to unmarshal the file content into users slice
-
 	if err := json.Unmarshal(file, &Users); err != nil {
 		fmt.Printf("Error unmarshaling JSON: %v\n", err)
-		Users = []User{} // Reset Users to empty slice
+		Users = []models.User{} // Reset Users to empty slice
 		return err
 	}
 	return nil
 }
 
-// Save Users to JSON file
-
+// SaveUsers saves users to a JSON file.
 func SaveUsers(filename string) error {
 	file, err := json.MarshalIndent(Users, "", "    ")
 	if err != nil {
@@ -79,8 +71,7 @@ func SaveUsers(filename string) error {
 	return os.WriteFile(filename, file, 0644)
 }
 
-// Checking if the Username is unique or not
-
+// IsUsernameUnique checks if the username is unique.
 func IsUsernameUnique(username string) bool {
 	for _, user := range Users {
 		if user.Username == username {
@@ -90,8 +81,7 @@ func IsUsernameUnique(username string) bool {
 	return true
 }
 
-//  Validating the password for given specification
-
+// IsValidPassword validates the password against specified criteria.
 func IsValidPassword(password string) bool {
 	var (
 		hasUpper   = regexp.MustCompile(`[A-Z]`).MatchString
@@ -100,25 +90,20 @@ func IsValidPassword(password string) bool {
 		hasSpecial = regexp.MustCompile(`[!@#\$%\^&\*\(\)_+\-=\[\]\;:'",.<>?/|\\]`).MatchString
 	)
 
-	if len(password) > 12 && hasUpper(password) && hasLower(password) && hasNumber(password) && hasSpecial(password) {
-		return true
-	}
-	return false
+	return len(password) > 8 && hasUpper(password) && hasLower(password) && hasNumber(password) && hasSpecial(password)
 }
 
-// Hash a password using bcrypt
-
+// HashPassword hashes a password using bcrypt.
 func HashPassword(password string) (string, error) {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
-	return string(bytes), err
+	if err != nil {
+		return "", err
+	}
+	return string(bytes), nil
 }
 
-// Compare a hashed password with a plaintext password
-
+// CheckPasswordHash compares a hashed password with a plaintext password.
 func CheckPasswordHash(password, hash string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
-	if err == nil {
-		return true
-	}
-	return false
+	return err == nil
 }

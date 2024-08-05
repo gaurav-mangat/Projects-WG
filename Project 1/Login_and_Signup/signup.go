@@ -1,7 +1,12 @@
 package Login_and_Signup
 
-import "fmt"
-import a "FileHandling/utils"
+import (
+	"FileHandling/models"
+	"FileHandling/utils"
+	"fmt"
+	"regexp"
+	"strings"
+)
 
 // Sign up a new user
 
@@ -9,47 +14,66 @@ func SignUp() {
 	const filename = "users.json"
 
 	// Load users from the file
-	if err := a.LoadUsers(filename); err != nil {
-		fmt.Printf("Error loading users: %v\n", err)
+	if err := utils.LoadUsers(filename); err != nil {
+		fmt.Printf("\033[1;31mError loading users: %v\033[0m\n", err) // Red bold
 		return
 	}
 
-	var username string
-	fmt.Print("\n\nEnter username (Username should only be a single word) : ")
-	_, err := fmt.Scan(&username)
+	// Signup form
+
+	fmt.Println()
+	fmt.Println("\033[1;36m----------------------------------------------------------------\033[0m")    // Sky blue
+	fmt.Println("\033[1;31m                       SIGN UP FORM                                \033[0m") // Red bold
+	fmt.Println("\033[1;36m----------------------------------------------------------------\033[0m")
+	fmt.Println()
+	username := utils.ReadInput("\033[1;34mEnter username (Username should only be a single word): \033[0m")
+	if strings.Contains(username, " ") {
+		fmt.Println("\033[1;31m\nInvalid username: Username should only be a single word.\033[0m")
+		fmt.Println("\nTry again....")
+		return
+	}
+
+	if !utils.IsUsernameUnique(username) {
+		fmt.Println("\033[1;31mUsername already exists... Please use another.\033[0m") // Red bold
+		return
+	}
+
+	password := utils.ReadInput("\033[1;34mEnter password (min 9 chars, include lowercase, uppercase, numbers, special): \033[0m")
+	if strings.Contains(password, " ") {
+		fmt.Println("\033[1;31m\nYou can't use space in password.\033[0m")
+		fmt.Println("\nTry again....")
+		return
+	}
+
+	if !utils.IsValidPassword(password) {
+		fmt.Println("\033[1;31mPassword does not meet complexity requirements.\033[0m") // Red bold
+		return
+	}
+
+	fullName := utils.ReadInput("\033[1;34mEnter full name: \033[0m")
+
+	var mobileNumber string
+	valid := false
+
+	for !valid {
+		mobileNumber = utils.ReadInput("\033[1;34mEnter mobile number: \033[0m")
+		if isValidMobileNumber(mobileNumber) {
+			valid = true
+
+		} else {
+			fmt.Println("\033[1;31mInvalid mobile number. Please enter a 10-digit number starting with 6, 7, 8, or 9.\033[0m")
+		}
+	}
+
+	gender := utils.ReadInput("\033[1;34mEnter gender (Male/Female/Other): \033[0m")
+
+	hashedPassword, err := utils.HashPassword(password)
 	if err != nil {
-		fmt.Printf("Error reading username: %v\n", err)
-	}
-	//
-	//password := a.ReadInput("Enter password (Password must have at least 12 characters and should contain lowercase, uppercase, numbers, and special characters): ")
-	var password string
-	fmt.Print("Enter password   : ")
-	fmt.Scan(&password)
-	if err != nil {
-		fmt.Println("Password input failed: ", err)
+		fmt.Printf("\033[1;31mError hashing password: %v\033[0m\n", err) // Red bold
 		return
 	}
 
-	if !a.IsValidPassword(password) {
-		fmt.Println("Password does not meet complexity requirements.")
-		return
-	}
-	if !a.IsUsernameUnique(username) {
-		fmt.Println("Username already exists... Please use another.")
-		return
-	}
-
-	fullName := a.ReadInput("Enter full name: ")
-	mobileNumber := a.ReadInput("Enter mobile number: ")
-	gender := a.ReadInput("Enter gender (Male/Female/Other): ")
-
-	hashedPassword, err := a.HashPassword(password)
-	if err != nil {
-		fmt.Printf("Error hashing password: %v\n", err)
-		return
-	}
-
-	a.Users = append(a.Users, a.User{
+	utils.Users = append(utils.Users, models.User{
 		Username:     username,
 		PasswordHash: hashedPassword,
 		FullName:     fullName,
@@ -57,25 +81,32 @@ func SignUp() {
 		Gender:       gender,
 	})
 
-	if err := a.SaveUsers(filename); err != nil {
-		fmt.Printf("Error saving users: %v\n", err)
+	if err := utils.SaveUsers(filename); err != nil {
+		fmt.Printf("\033[1;31mError saving users: %v\033[0m\n", err) // Red bold
 	} else {
-		fmt.Println("User signed up successfully!")
-		fmt.Println("\n\nPress 1 to Login \nPress 2 to exit")
-		var ch int
-		fmt.Println("Enter your choice :")
-		fmt.Scanf("%d", &ch)
+		fmt.Println("\033[1;32m\n\nUser signed up successfully!\033[0m") // Green bold
+		fmt.Println("\n\nPress 1 to Login \nPress 2 to Exit")
+		var choice int
+		fmt.Print("\033[1;34m\nEnter your choice: \033[0m") // Blue bold
+		_, err := fmt.Scan(&choice)
+		if err != nil {
+			fmt.Printf("\033[1;31mError reading choice: %v\033[0m\n", err) // Red bold
+			return
+		}
 
-		switch ch {
+		switch choice {
 		case 1:
 			Login()
-
 		case 2:
 			return
-
 		default:
-			fmt.Println("Invalid choice")
-			break
+			fmt.Println("\033[1;31mInvalid choice\033[0m") // Red bold
 		}
 	}
+}
+
+// Function to validate mobile number
+func isValidMobileNumber(number string) bool {
+	match, _ := regexp.MatchString(`^[6-9]\d{9}$`, number)
+	return match
 }
