@@ -68,5 +68,12 @@
         "full_name": "Palak Gupta",
         "mobile_number": "9865277388",
         "gender": "Female"
+    },
+    {
+        "username": "riya120",
+        "password_hash": "$2a$10$kj3Y/7eixae7Ofgt7SAwhetvTEr68iEsJuRqGrRLpfmzw9lUXGYZW",
+        "full_name": "Riya Gupta",
+        "mobile_number": "9865727737",
+        "gender": "Female"
     }
 ]

@@ -46,7 +46,7 @@ func UserProfile() {
 	fmt.Println("\033[1;36m---------------------------------------------\033[0m") // Sky blue
 	fmt.Println("\033[1;34m               USER PROFILE                 \033[0m")  // Blue
 	fmt.Println("\033[1;36m---------------------------------------------\033[0m")
-	fmt.Printf("\nUsername     : %s\n", foundUser.Username)
+	fmt.Printf("\nUsername      : %s\n", foundUser.Username)
 	fmt.Printf("Full Name      : %s\n", foundUser.FullName)
 	fmt.Printf("Mobile Number  : %s\n", foundUser.MobileNumber)
 	fmt.Printf("Gender         : %s\n", foundUser.Gender)

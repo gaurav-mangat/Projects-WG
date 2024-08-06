@@ -59,6 +59,7 @@ func generateTaskID(user UserTasks) int {
 }
 
 // Add a new task
+
 func addTask() {
 	title := utils.ReadInput("Enter task: ")
 
@@ -138,7 +139,7 @@ func viewCompletedTasks() {
 		if user.Username == ActiveUser.Username {
 			for _, task := range user.Tasks {
 				if task.Completed {
-					fmt.Printf("ID %d :  %s\n", task.ID, task.Title)
+					fmt.Printf("%d :  %s\n", task.ID, task.Title)
 				}
 			}
 			return
@@ -154,7 +155,7 @@ func viewUncompletedTasks() {
 		if user.Username == ActiveUser.Username {
 			for _, task := range user.Tasks {
 				if !task.Completed {
-					fmt.Printf("ID %d : %s\n", task.ID, task.Title)
+					fmt.Printf("%d : %s\n", task.ID, task.Title)
 				}
 			}
 			return
@@ -164,6 +165,7 @@ func viewUncompletedTasks() {
 }
 
 // Task management section
+
 func TaskManagementSection() {
 	// Load tasks before displaying the task management menu
 	if err := loadTasks(); err != nil {

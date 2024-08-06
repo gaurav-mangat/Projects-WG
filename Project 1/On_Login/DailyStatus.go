@@ -124,7 +124,7 @@ func viewDailyStatus() {
 
 func DailyStatusSection() {
 	for {
-		fmt.Println()
+		fmt.Println("\n")
 		fmt.Println("\033[1;36m---------------------------------------------\033[0m") // Sky blue
 		fmt.Println("\033[1;34m          DAILY STATUS SECTION             \033[0m")   // Blue
 		fmt.Println("\033[1;36m---------------------------------------------\033[0m")

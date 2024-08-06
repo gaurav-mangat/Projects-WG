@@ -1,0 +1,14 @@
+[
+  {
+    "username": "dushyant",
+    "course_progress": {
+      "101": [
+        101.1,
+        101.2,
+        101.3
+      ]
+    },
+    "overall_completion": 0,
+    "course_completion": null
+  }
+]

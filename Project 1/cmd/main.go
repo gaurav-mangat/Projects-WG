@@ -2,7 +2,9 @@ package main
 
 import (
 	li "FileHandling/Login_and_Signup"
+	"FileHandling/utils"
 	"fmt"
+	"strconv"
 )
 
 func main() {
@@ -39,18 +41,18 @@ func main() {
 		case 1:
 			li.Login()
 		case 2:
-			var year int
-			fmt.Print("\033[1;34m\n     Enter your birth year: \033[0m") // Blue bold
-			_, err := fmt.Scanln(&year)
-			if err != nil {
-				fmt.Println("\033[1;31m     Error reading input:", err, "\033[0m") // Red bold
-				continue
-			}
-			if year < 2004 && year > 1910 {
+			var yearString string
+			var yearInt int
+			//fmt.Print("\033[1;34m\n     Enter your birth year: \033[0m") // Blue bold
+			yearString = utils.ReadInput("\033[1;34m\n     Enter your birth year: \033[0m")
+			yearInt, err = strconv.Atoi(yearString)
+
+			if yearInt < 2004 && yearInt > 1910 {
 				fmt.Println("\033[1;33m\n\n     Hurray! You are eligible to sign up 😃😃\n\033[0m") // Yellow bold
 				li.SignUp()
 			} else {
-				fmt.Println("\033[1;31m\n\n     Sorry! You are not eligible for SignUp \033[0m") // Red bold
+				fmt.Println("\033[1;31m\n\n  Invalid Birth Year!!! \033[0m")                  // Red bold
+				fmt.Println("\033[1;31m\n\n  Sorry! You are not eligible for SignUp \033[0m") // Red bold
 			}
 		case 3:
 			fmt.Println("\033[1;32m\n  Successfully exited the program....\033[0m") // Green bold

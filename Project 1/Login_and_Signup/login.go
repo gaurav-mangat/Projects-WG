@@ -4,7 +4,6 @@ import (
 	ol "FileHandling/On_Login"
 	"FileHandling/utils"
 	"fmt"
-	"strings"
 )
 
 func Login() {
@@ -16,7 +15,9 @@ func Login() {
 		return
 	}
 
-	for {
+	attemptsLeft := 3
+
+	for attemptsLeft > 0 {
 		var username, password string
 		fmt.Println()
 		fmt.Println()
@@ -25,17 +26,13 @@ func Login() {
 		fmt.Println("\033[1;36m----------------------------------------------------------------\033[0m")
 
 		username = utils.ReadInput("\n             Enter username: ")
-		if strings.Contains(username, " ") {
-			fmt.Println("\033[1;31m            User name is only of one word.\033[0m")
-			fmt.Println("\nPlease try again....")
+		if !utils.IsValidInput2(username) {
 			return
 		}
 
 		password = utils.ReadInput("             Enter password: ")
 
-		if strings.Contains(password, " ") {
-			fmt.Println("\033[1;31mP\nassword doesn't contain any spaces.\033[0m")
-			fmt.Println("\nPlease try again....")
+		if !utils.IsValidInput(password) {
 			return
 		}
 		fmt.Println()
@@ -49,7 +46,7 @@ func Login() {
 				ol.ActiveUser = user
 				ol.Dashboard(user)
 				fmt.Println()
-				break
+				return // Exit after successful login
 			}
 		}
 
@@ -57,13 +54,19 @@ func Login() {
 			// Successful login, exit the loop
 			break
 		} else {
-			// Failed login, prompt the user
-			fmt.Println("Login failed. Please check your username and password.")
+			// Failed login, decrement the attempts left
+			attemptsLeft--
+			if attemptsLeft == 0 {
+				fmt.Println("\033[1;31mLogin failed. You have exhausted all attempts.\033[0m") // Red bold
+				return
+			}
+			fmt.Printf("Login failed. Please check your username and password. You have %d attempt(s) left.\n", attemptsLeft)
 
 			fmt.Println("\nWhat would you like to do next?")
 			fmt.Println("1. Retry Login")
 			fmt.Println("2. Sign up")
 			fmt.Println("3. Exit")
+
 			var choice int
 			fmt.Print("Enter your choice: ")
 			fmt.Scan(&choice)

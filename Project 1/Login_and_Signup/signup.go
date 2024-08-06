@@ -5,11 +5,9 @@ import (
 	"FileHandling/utils"
 	"fmt"
 	"regexp"
-	"strings"
 )
 
 // Sign up a new user
-
 func SignUp() {
 	const filename = "users.json"
 
@@ -20,56 +18,70 @@ func SignUp() {
 	}
 
 	// Signup form
-
 	fmt.Println()
 	fmt.Println("\033[1;36m----------------------------------------------------------------\033[0m")    // Sky blue
 	fmt.Println("\033[1;31m                       SIGN UP FORM                                \033[0m") // Red bold
 	fmt.Println("\033[1;36m----------------------------------------------------------------\033[0m")
 	fmt.Println()
-	username := utils.ReadInput("\033[1;34mEnter username (Username should only be a single word): \033[0m")
-	if strings.Contains(username, " ") {
-		fmt.Println("\033[1;31m\nInvalid username: Username should only be a single word.\033[0m")
-		fmt.Println("\nTry again....")
-		return
-	}
 
-	if !utils.IsUsernameUnique(username) {
-		fmt.Println("\033[1;31mUsername already exists... Please use another.\033[0m") // Red bold
-		return
-	}
-
-	password := utils.ReadInput("\033[1;34mEnter password (min 9 chars, include lowercase, uppercase, numbers, special): \033[0m")
-	if strings.Contains(password, " ") {
-		fmt.Println("\033[1;31m\nYou can't use space in password.\033[0m")
-		fmt.Println("\nTry again....")
-		return
-	}
-
-	if !utils.IsValidPassword(password) {
-		fmt.Println("\033[1;31mPassword does not meet complexity requirements.\033[0m") // Red bold
-		return
-	}
-
-	fullName := utils.ReadInput("\033[1;34mEnter full name: \033[0m")
-
-	var mobileNumber string
+	// Get username
+	var username string
 	valid := false
-
 	for !valid {
-		mobileNumber = utils.ReadInput("\033[1;34mEnter mobile number: \033[0m")
-		if isValidMobileNumber(mobileNumber) {
+		username = utils.ReadInput("\033[1;34mEnter username (Username should only be a single word): \033[0m")
+		if utils.IsValidInput(username) {
 			valid = true
-
 		} else {
-			fmt.Println("\033[1;31mInvalid mobile number. Please enter a 10-digit number starting with 6, 7, 8, or 9.\033[0m")
+			fmt.Println("\033[1;31mInvalid username.\nPlease enter a valid username.\n\033[0m")
 		}
 	}
 
-	gender := utils.ReadInput("\033[1;34mEnter gender (Male/Female/Other): \033[0m")
+	// Get password
+
+	var password string
+	valid = false
+	for !valid {
+		password = utils.ReadInput("\033[1;34m\nEnter password (min 9 chars, include lowercase, uppercase, numbers, special): \033[0m")
+		if utils.IsValidInput(password) && utils.IsValidPassword(password) {
+			valid = true
+		} else {
+			fmt.Println("\033[1;31m\nPassword does not meet complexity requirements.\nPlease enter a valid password.\033[0m")
+		}
+	}
+
+	// Get full name
+
+	var fullName string
+
+	fullName = utils.ReadInput("\033[1;34m\nEnter full name: \033[0m")
+
+	// Get mobile number
+	var mobileNumber string
+	valid = false
+	for !valid {
+		mobileNumber = utils.ReadInput("\033[1;34m\nEnter mobile number: \033[0m")
+		if utils.IsValidInput(mobileNumber) && isValidMobileNumber(mobileNumber) {
+			valid = true
+		} else {
+			fmt.Println("\033[1;31m\nInvalid mobile number.\nPlease enter a 10-digit number starting with 6, 7, 8, or 9.\033[0m")
+		}
+	}
+
+	// Get gender
+	var gender string
+	valid = false
+	for !valid {
+		gender = utils.ReadInput("\033[1;34mEnter gender (Male/Female/Other): \033[0m")
+		if utils.IsValidInput(gender) && (gender == "Male" || gender == "Female" || gender == "Others") {
+			valid = true
+		} else {
+			fmt.Println("\033[1;31m\nInvalid gender.\nPlease enter a valid gender.\033[0m")
+		}
+	}
 
 	hashedPassword, err := utils.HashPassword(password)
 	if err != nil {
-		fmt.Printf("\033[1;31mError hashing password: %v\033[0m\n", err) // Red bold
+		fmt.Printf("\033[1;31m\nError hashing password: %v\033[0m\n", err) // Red bold
 		return
 	}
 
