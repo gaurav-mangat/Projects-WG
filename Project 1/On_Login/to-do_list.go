@@ -5,10 +5,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strconv"
 )
 
-// Task struct for a single line task
+// Task struct for a single line task with an ID
 type Task struct {
+	ID        int    `json:"id"`
 	Title     string `json:"title"`
 	Completed bool   `json:"completed"`
 }
@@ -45,25 +47,43 @@ func saveTasks() error {
 	return os.WriteFile(tasksFilename, file, 0644)
 }
 
+// Generate a unique ID for a new task
+func generateTaskID(user UserTasks) int {
+	var maxID int
+	for _, task := range user.Tasks {
+		if task.ID > maxID {
+			maxID = task.ID
+		}
+	}
+	return maxID + 1
+}
+
 // Add a new task
 func addTask() {
-	title := utils.ReadInput("Enter task : ")
+	title := utils.ReadInput("Enter task: ")
 
-	newTask := Task{
-		Title:     title,
-		Completed: false,
-	}
+	var newTask Task
 
-	var userFound bool
+	// Find the user and generate a unique ID for the new task
 	for i, user := range userTasks {
 		if user.Username == ActiveUser.Username {
+			newTask = Task{
+				ID:        generateTaskID(user),
+				Title:     title,
+				Completed: false,
+			}
 			userTasks[i].Tasks = append(userTasks[i].Tasks, newTask)
-			userFound = true
 			break
 		}
 	}
 
-	if !userFound {
+	// If user not found, create a new entry
+	if newTask.ID == 0 {
+		newTask = Task{
+			ID:        1,
+			Title:     title,
+			Completed: false,
+		}
 		userTasks = append(userTasks, UserTasks{
 			Username: ActiveUser.Username,
 			Tasks:    []Task{newTask},
@@ -77,17 +97,22 @@ func addTask() {
 	}
 }
 
-// Mark a task as complete
+// Mark a task as complete using the task ID
 func markTaskComplete() {
-	taskTitle := utils.ReadInput("Enter the title of the task to mark as complete: ")
+	taskIDStr := utils.ReadInput("Enter the ID of the task to mark as complete: ")
+	taskID, err := strconv.Atoi(taskIDStr)
+	if err != nil {
+		fmt.Println("Invalid task ID.")
+		return
+	}
 
-	var userFound bool
+	var taskFound bool
 	for i, user := range userTasks {
 		if user.Username == ActiveUser.Username {
 			for j, task := range user.Tasks {
-				if task.Title == taskTitle && !task.Completed {
+				if task.ID == taskID && !task.Completed {
 					userTasks[i].Tasks[j].Completed = true
-					userFound = true
+					taskFound = true
 					break
 				}
 			}
@@ -95,7 +120,7 @@ func markTaskComplete() {
 		}
 	}
 
-	if !userFound {
+	if !taskFound {
 		fmt.Println("Task not found or already completed.")
 	} else {
 		if err := saveTasks(); err != nil {
@@ -113,7 +138,7 @@ func viewCompletedTasks() {
 		if user.Username == ActiveUser.Username {
 			for _, task := range user.Tasks {
 				if task.Completed {
-					fmt.Printf("Title: %s\n", task.Title)
+					fmt.Printf("ID %d :  %s\n", task.ID, task.Title)
 				}
 			}
 			return
@@ -129,7 +154,7 @@ func viewUncompletedTasks() {
 		if user.Username == ActiveUser.Username {
 			for _, task := range user.Tasks {
 				if !task.Completed {
-					fmt.Printf("Title: %s\n", task.Title)
+					fmt.Printf("ID %d : %s\n", task.ID, task.Title)
 				}
 			}
 			return
@@ -140,6 +165,12 @@ func viewUncompletedTasks() {
 
 // Task management section
 func TaskManagementSection() {
+	// Load tasks before displaying the task management menu
+	if err := loadTasks(); err != nil {
+		fmt.Printf("Error loading tasks: %v\n", err)
+		return
+	}
+
 	for {
 		fmt.Println()
 		fmt.Println("\033[1;36m---------------------------------------------\033[0m") // Sky blue

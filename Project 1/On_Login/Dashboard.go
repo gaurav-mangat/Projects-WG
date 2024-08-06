@@ -2,9 +2,7 @@ package On_Login
 
 import (
 	"FileHandling/models"
-	a "FileHandling/utils"
 	"fmt"
-	"strconv"
 )
 
 var ActiveUser models.User
@@ -22,7 +20,9 @@ func Dashboard(activeUser models.User) {
 		fmt.Println("\033[1;36m----------------\033[0m") // Sky blue
 		fmt.Println("\033[1;34mPress 3 to Check Course Progress\033[0m")
 		fmt.Println("\033[1;36m----------------\033[0m") // Sky blue
-		fmt.Println("\033[1;34mPress 4 to Logout\033[0m")
+		fmt.Println("\033[1;34mPress 4 to see Your Profile\033[0m")
+		fmt.Println("\033[1;36m----------------\033[0m") // Sky blue
+		fmt.Println("\033[1;34mPress 5 to Exit\033[0m")
 		fmt.Println()
 
 		var choice int
@@ -40,24 +40,13 @@ func Dashboard(activeUser models.User) {
 		case 2:
 			TaskManagementSection()
 		case 3:
-			fmt.Println("Press 1 to Mark Section Complete")
-			fmt.Println("Press 2 to Display Progress")
-			subChoiceStr := a.ReadInput("Enter your choice: ")
-			subChoice, err := strconv.Atoi(subChoiceStr)
-			if err != nil {
-				fmt.Println("Invalid choice. Please enter a number.")
-				continue
-			}
-			if subChoice == 1 {
-				MarkCourseSectionComplete()
-			} else if subChoice == 2 {
-				DisplayCourseProgress()
-			} else {
-				fmt.Println("Invalid choice. Returning to main menu.")
-			}
-		case 4:
+			CourseProgress()
+		case 5:
 			fmt.Println("Logging out...")
 			return
+		case 4:
+			UserProfile()
+
 		default:
 			fmt.Println("Invalid choice. Please try again.")
 		}

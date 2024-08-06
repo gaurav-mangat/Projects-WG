@@ -54,5 +54,19 @@
         "full_name": "Dushyant Bansal",
         "mobile_number": "78300274483",
         "gender": "Others"
+    },
+    {
+        "username": "adarsh",
+        "password_hash": "$2a$10$/6gsA1ZWVxVzTFX9XeyoaOciw2kzb7dN6MW8h4X9qvwxSHQek9O9m",
+        "full_name": "Adarsh Singh",
+        "mobile_number": "9897198971",
+        "gender": "Male"
+    },
+    {
+        "username": "palak",
+        "password_hash": "$2a$10$KyGfE9MWunFYwZpT0wJ7M.3fvEMLRxnOjur1vvxmCF1R06f6gBiT6",
+        "full_name": "Palak Gupta",
+        "mobile_number": "9865277388",
+        "gender": "Female"
     }
 ]

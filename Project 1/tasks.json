@@ -3,11 +3,53 @@
         "username": "dushyant",
         "tasks": [
             {
-                "title": "No task today",
+                "id": 1,
+                "title": "Ab to kuch bhi nhi hai",
                 "completed": false
             },
             {
-                "title": "Clean code course complete",
+                "id": 2,
+                "title": "First task",
+                "completed": false
+            },
+            {
+                "id": 3,
+                "title": "Second task",
+                "completed": false
+            },
+            {
+                "id": 4,
+                "title": "Third task",
+                "completed": true
+            }
+        ]
+    },
+    {
+        "username": "adarsh",
+        "tasks": [
+            {
+                "id": 1,
+                "title": "Python course to complete",
+                "completed": true
+            },
+            {
+                "id": 2,
+                "title": "GUI bhi karana hai",
+                "completed": false
+            }
+        ]
+    },
+    {
+        "username": "palak",
+        "tasks": [
+            {
+                "id": 1,
+                "title": "First task",
+                "completed": true
+            },
+            {
+                "id": 2,
+                "title": "Second task",
                 "completed": false
             }
         ]

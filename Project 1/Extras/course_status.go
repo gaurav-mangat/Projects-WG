@@ -42,6 +42,7 @@ func saveCourseSections(filename string) error {
 }
 
 // Mark a course section as complete
+
 func MarkCourseSectionComplete() {
 	const filename = "course_sections.json"
 

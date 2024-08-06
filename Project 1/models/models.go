@@ -19,3 +19,26 @@ type DailyStatus struct {
 		DailyStatus string `json:"dailyStatus"`
 	} `json:"status"`
 }
+
+// Defining the structure for Course list
+
+type Course struct {
+	Courses []struct {
+		ID      int    `json:"id"`
+		Title   string `json:"title"`
+		Lessons []struct {
+			ID    float32 `json:"id"`
+			Title string  `json:"title"`
+		} `json:"lessons"`
+	} `json:"courses"`
+}
+
+type Progress struct {
+	Username string           `json:"username"`
+	Courses  []CourseProgress `json:"courses"`
+}
+
+type CourseProgress struct {
+	CourseID         int       `json:"course_id"`
+	CompletedLessons []float32 `json:"completed_lessons"`
+}

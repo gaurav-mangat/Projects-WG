@@ -1,0 +1,76 @@
+{
+  "courses": [
+    {
+      "id": 101,
+      "title": "Golang Fundamentals",
+      "lessons": [
+        {
+          "id": 101.1,
+          "title": "Basics of Golang"
+        },
+        {
+          "id": 101.2,
+          "title": "Understanding Variables and Types"
+        },
+        {
+          "id": 101.3,
+          "title": "Defining Functions"
+        }
+      ]
+    },
+    {
+      "id": 202,
+      "title": "Golang Mastery",
+      "lessons": [
+        {
+          "id": 202.1,
+          "title": "Concurrency Models"
+        },
+        {
+          "id": 202.2,
+          "title": "Advanced Error Handling"
+        },
+        {
+          "id": 202.3,
+          "title": "Building Web Services"
+        }
+      ]
+    },
+    {
+      "id": 303,
+      "title": "Angular for Beginners",
+      "lessons": [
+        {
+          "id": 303.1,
+          "title": "Angular Basics"
+        },
+        {
+          "id": 303.2,
+          "title": "Understanding Components"
+        },
+        {
+          "id": 303.3,
+          "title": "Dependency Injection in Angular"
+        }
+      ]
+    },
+    {
+      "id": 404,
+      "title": "Integrated Development with Go and Angular",
+      "lessons": [
+        {
+          "id": 404.1,
+          "title": "Project Initialization"
+        },
+        {
+          "id": 404.2,
+          "title": "Creating REST APIs with Go"
+        },
+        {
+          "id": 404.3,
+          "title": "Combining Go with Angular"
+        }
+      ]
+    }
+  ]
+}

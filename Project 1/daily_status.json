@@ -53,6 +53,19 @@
             {
                 "date": "2024-08-06",
                 "dailyStatus": "hello bro how are you doing. \\n Hello again"
+            },
+            {
+                "date": "2024-08-06",
+                "dailyStatus": "Completed assignment 1"
+            }
+        ]
+    },
+    {
+        "username": "palak",
+        "status": [
+            {
+                "date": "2024-08-06",
+                "dailyStatus": "First status"
             }
         ]
     }
