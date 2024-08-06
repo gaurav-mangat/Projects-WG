@@ -4,7 +4,6 @@ import (
 	ol "FileHandling/On_Login"
 	"FileHandling/utils"
 	"fmt"
-	"log"
 	"strings"
 )
 
@@ -59,7 +58,7 @@ func Login() {
 			break
 		} else {
 			// Failed login, prompt the user
-			log.Println("Login failed. Please check your username and password.")
+			fmt.Println("Login failed. Please check your username and password.")
 
 			fmt.Println("\nWhat would you like to do next?")
 			fmt.Println("1. Retry Login")

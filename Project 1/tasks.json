@@ -1,0 +1,15 @@
+[
+    {
+        "username": "dushyant",
+        "tasks": [
+            {
+                "title": "No task today",
+                "completed": false
+            },
+            {
+                "title": "Clean code course complete",
+                "completed": false
+            }
+        ]
+    }
+]

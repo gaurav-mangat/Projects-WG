@@ -13,15 +13,6 @@
         "status": [
             {
                 "date": "2024-08-05",
-                "dailyStatus": "Today daily status"
-            }
-        ]
-    },
-    {
-        "username": "rishabh",
-        "status": [
-            {
-                "date": "2024-08-05",
                 "dailyStatus": "new daily status"
             }
         ]
@@ -50,6 +41,18 @@
             {
                 "date": "2024-08-05",
                 "dailyStatus": ""
+            },
+            {
+                "date": "2024-08-06",
+                "dailyStatus": "naya naya daily status"
+            },
+            {
+                "date": "2024-08-06",
+                "dailyStatus": "Hii Gaurav"
+            },
+            {
+                "date": "2024-08-06",
+                "dailyStatus": "hello bro how are you doing. \\n Hello again"
             }
         ]
     }

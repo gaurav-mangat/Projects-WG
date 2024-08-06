@@ -16,12 +16,12 @@ func Dashboard(activeUser models.User) {
 		fmt.Println("\033[1;36m---------------------------------------------\033[0m")  // Sky blue
 		fmt.Println("\033[1;32m                DASHBOARD                     \033[0m") // Green
 		fmt.Println("\033[1;36m---------------------------------------------\033[0m")  // Sky blue
-		fmt.Println("\n\033[1;34mPress 1 to go into Daily Status section\033[0m")
-		fmt.Println("\033[1;36m------------------------------\033[0m") // Sky blue
+		fmt.Println("\n\033[1;34mPress 1 for Daily Status section\033[0m")
+		fmt.Println("\033[1;36m----------------\033[0m") // Sky blue
 		fmt.Println("\033[1;34mPress 2 to Manage To-Do List\033[0m")
-		fmt.Println("\033[1;36m------------------------------\033[0m") // Sky blue
+		fmt.Println("\033[1;36m----------------\033[0m") // Sky blue
 		fmt.Println("\033[1;34mPress 3 to Check Course Progress\033[0m")
-		fmt.Println("\033[1;36m------------------------------\033[0m") // Sky blue
+		fmt.Println("\033[1;36m----------------\033[0m") // Sky blue
 		fmt.Println("\033[1;34mPress 4 to Logout\033[0m")
 		fmt.Println()
 
@@ -36,23 +36,9 @@ func Dashboard(activeUser models.User) {
 
 		switch choice {
 		case 1:
-			AddDailyStatus()
+			DailyStatusSection()
 		case 2:
-			fmt.Println("Press 1 to Add a Task")
-			fmt.Println("Press 2 to Mark Task as Complete")
-			subChoiceStr := a.ReadInput("Enter your choice: ")
-			subChoice, err := strconv.Atoi(subChoiceStr)
-			if err != nil {
-				fmt.Println("Invalid choice. Please enter a number.")
-				continue
-			}
-			if subChoice == 1 {
-				AddTodoItem()
-			} else if subChoice == 2 {
-				MarkTodoComplete()
-			} else {
-				fmt.Println("Invalid choice. Returning to main menu.")
-			}
+			TaskManagementSection()
 		case 3:
 			fmt.Println("Press 1 to Mark Section Complete")
 			fmt.Println("Press 2 to Display Progress")
