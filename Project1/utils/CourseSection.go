@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"FileHandling/Config"
 	"FileHandling/models"
 	"encoding/json"
 	"fmt"
@@ -12,7 +13,7 @@ var UserProgress []models.Progress
 
 // Load progress data from a file
 func LoadProgress(filename string) error {
-	file, err := ioutil.ReadFile(filename)
+	file, err := os.ReadFile(filename)
 	if err != nil {
 		// If the file doesn't exist, create an empty progress file
 		if os.IsNotExist(err) {
@@ -48,7 +49,7 @@ func SaveProgress(filename string) error {
 func InitializeUserProgress(username string) *models.Progress {
 	const progressFile = "progress.json"
 
-	if err := LoadProgress(progressFile); err != nil {
+	if err := LoadProgress(Config.ProgressFile); err != nil {
 		fmt.Printf("\033[1;31mError loading progress: %v\033[0m\n", err)
 		return nil
 	}
@@ -69,7 +70,7 @@ func InitializeUserProgress(username string) *models.Progress {
 	}
 	UserProgress = append(UserProgress, *userProgress)
 
-	if err := SaveProgress(progressFile); err != nil {
+	if err := SaveProgress(Config.ProgressFile); err != nil {
 		fmt.Printf("\033[1;31mError saving progress: %v\033[0m\n", err)
 		return nil
 	}

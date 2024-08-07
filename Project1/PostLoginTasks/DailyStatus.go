@@ -1,6 +1,7 @@
-package On_Login
+package PostLoginTasks
 
 import (
+	"FileHandling/Config"
 	d "FileHandling/models"
 	a "FileHandling/utils"
 	"encoding/json"
@@ -86,7 +87,7 @@ func AddDailyStatus() {
 		dailyStatuses = append(dailyStatuses, data)
 	}
 
-	if err := saveDailyStatuses(filename); err != nil {
+	if err := saveDailyStatuses(Config.DailyStatusFile); err != nil {
 		fmt.Printf("Error saving daily statuses: %v\n", err)
 	} else {
 		fmt.Println("Daily status added successfully!")

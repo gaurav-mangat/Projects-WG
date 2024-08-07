@@ -1,6 +1,7 @@
-package On_Login
+package PostLoginTasks
 
 import (
+	"FileHandling/Config"
 	"FileHandling/models"
 	"encoding/json"
 	"fmt"
@@ -10,8 +11,8 @@ import (
 var users []models.User
 
 func loadUserDetails() error {
-	const userFilename = "users.json"
-	file, err := os.ReadFile(userFilename)
+	const userFilename = Config.UserFile
+	file, err := os.ReadFile(Config.UserFile)
 	if err != nil {
 		if os.IsNotExist(err) {
 			users = []models.User{}
@@ -46,7 +47,7 @@ func UserProfile() {
 	fmt.Println("\033[1;36m---------------------------------------------\033[0m") // Sky blue
 	fmt.Println("\033[1;34m               USER PROFILE                 \033[0m")  // Blue
 	fmt.Println("\033[1;36m---------------------------------------------\033[0m")
-	fmt.Printf("\nUsername      : %s\n", foundUser.Username)
+	fmt.Printf("Username       : %s\n", foundUser.Username)
 	fmt.Printf("Full Name      : %s\n", foundUser.FullName)
 	fmt.Printf("Mobile Number  : %s\n", foundUser.MobileNumber)
 	fmt.Printf("Gender         : %s\n", foundUser.Gender)

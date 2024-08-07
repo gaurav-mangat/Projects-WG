@@ -75,5 +75,26 @@
         "full_name": "Riya Gupta",
         "mobile_number": "9865727737",
         "gender": "Female"
+    },
+    {
+        "username": "Sumit",
+        "password_hash": "$2a$10$1OxJMcaQATyTacyZtTxIhOUjHI.ukVtE89q/KtdNZP27mR7liw0FG",
+        "full_name": "Sumit Saini",
+        "mobile_number": "7834343455",
+        "gender": "Male"
+    },
+    {
+        "username": "divy",
+        "password_hash": "$2a$10$k63FArgtZmwvKhLeLiJO4ecDgxRGkOyn.8lvfENgsybSqZSqkeKsW",
+        "full_name": "Divy Mishra",
+        "mobile_number": "9876543210",
+        "gender": "Male"
+    },
+    {
+        "username": "divya",
+        "password_hash": "$2a$10$CpyF9sqaLbiVqY85.cAzMuemSFlS0n8nlt1T.7crIWa.vY8Q/mnJS",
+        "full_name": "Divya Gupta",
+        "mobile_number": "9876567890",
+        "gender": "Female"
     }
 ]

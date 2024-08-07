@@ -75,6 +75,8 @@ func SaveUsers(filename string) error {
 func IsUsernameUnique(username string) bool {
 	for _, user := range Users {
 		if user.Username == username {
+
+			fmt.Println("This username is already taken.")
 			return false
 		}
 	}

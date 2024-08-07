@@ -1,4 +1,4 @@
-package On_Login
+package PostLoginTasks
 
 import (
 	"FileHandling/models"
@@ -14,19 +14,19 @@ func Dashboard(activeUser models.User) {
 		fmt.Println("\033[1;36m---------------------------------------------\033[0m")  // Sky blue
 		fmt.Println("\033[1;32m                DASHBOARD                     \033[0m") // Green
 		fmt.Println("\033[1;36m---------------------------------------------\033[0m")  // Sky blue
-		fmt.Println("\n\033[1;34mPress 1 for Daily Status section\033[0m")
+		fmt.Println("\n\033[1;34m     1. Daily Status Section\033[0m")
 		fmt.Println()
-		fmt.Println("\033[1;34mPress 2 to Manage To-Do List\033[0m")
+		fmt.Println("\033[1;34m     2. Manage To-Do List\033[0m")
 		fmt.Println()
-		fmt.Println("\033[1;34mPress 3 to Check Course Progress\033[0m")
+		fmt.Println("\033[1;34m     3. Courses Section\033[0m")
 		fmt.Println() //
-		fmt.Println("\033[1;34mPress 4 to see Your Profile\033[0m")
+		fmt.Println("\033[1;34m     4. Your Profile\033[0m")
 		fmt.Println()
-		fmt.Println("\033[1;34mPress 5 to Exit\033[0m")
+		fmt.Println("\033[1;34m     5. To Exit\033[0m")
 		fmt.Println()
 
 		var choice int
-		fmt.Print("Enter your choice: ")
+		fmt.Print("     Enter your choice: ")
 		_, err := fmt.Scan(&choice)
 
 		if err != nil {

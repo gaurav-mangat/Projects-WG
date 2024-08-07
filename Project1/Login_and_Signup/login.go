@@ -1,16 +1,17 @@
 package Login_and_Signup
 
 import (
-	ol "FileHandling/On_Login"
+	"FileHandling/Config"
+	ol "FileHandling/PostLoginTasks"
 	"FileHandling/utils"
 	"fmt"
 )
 
 func Login() {
-	const filename = "users.json"
+	const filename = Config.UserFile
 
 	// Load users from the file once
-	if err := utils.LoadUsers(filename); err != nil {
+	if err := utils.LoadUsers(Config.UserFile); err != nil {
 		fmt.Printf("Error loading users: %v\n", err)
 		return
 	}

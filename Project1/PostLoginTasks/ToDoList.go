@@ -1,6 +1,7 @@
-package On_Login
+package PostLoginTasks
 
 import (
+	"FileHandling/Config"
 	"FileHandling/utils"
 	"encoding/json"
 	"fmt"
@@ -27,7 +28,7 @@ const tasksFilename = "tasks.json"
 
 // Load tasks from JSON file
 func loadTasks() error {
-	file, err := os.ReadFile(tasksFilename)
+	file, err := os.ReadFile(Config.TaskFile)
 	if err != nil {
 		if os.IsNotExist(err) {
 			userTasks = []UserTasks{}
@@ -44,7 +45,7 @@ func saveTasks() error {
 	if err != nil {
 		return err
 	}
-	return os.WriteFile(tasksFilename, file, 0644)
+	return os.WriteFile(Config.TaskFile, file, 0644)
 }
 
 // Generate a unique ID for a new task

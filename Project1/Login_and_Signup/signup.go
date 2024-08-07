@@ -1,6 +1,7 @@
 package Login_and_Signup
 
 import (
+	"FileHandling/Config"
 	"FileHandling/models"
 	"FileHandling/utils"
 	"fmt"
@@ -9,10 +10,10 @@ import (
 
 // Sign up a new user
 func SignUp() {
-	const filename = "users.json"
+	const filename = Config.UserFile
 
 	// Load users from the file
-	if err := utils.LoadUsers(filename); err != nil {
+	if err := utils.LoadUsers(Config.UserFile); err != nil {
 		fmt.Printf("\033[1;31mError loading users: %v\033[0m\n", err) // Red bold
 		return
 	}
@@ -34,6 +35,10 @@ func SignUp() {
 		} else {
 			fmt.Println("\033[1;31mInvalid username.\nPlease enter a valid username.\n\033[0m")
 		}
+		if !utils.IsUsernameUnique(username) {
+			return
+		}
+
 	}
 
 	// Get password
@@ -71,7 +76,7 @@ func SignUp() {
 	var gender string
 	valid = false
 	for !valid {
-		gender = utils.ReadInput("\033[1;34mEnter gender (Male/Female/Other): \033[0m")
+		gender = utils.ReadInput("\033[1;34m\nEnter gender (Male/Female/Other): \033[0m")
 		if utils.IsValidInput(gender) && (gender == "Male" || gender == "Female" || gender == "Others") {
 			valid = true
 		} else {
@@ -93,7 +98,7 @@ func SignUp() {
 		Gender:       gender,
 	})
 
-	if err := utils.SaveUsers(filename); err != nil {
+	if err := utils.SaveUsers(Config.UserFile); err != nil {
 		fmt.Printf("\033[1;31mError saving users: %v\033[0m\n", err) // Red bold
 	} else {
 		fmt.Println("\033[1;32m\n\nUser signed up successfully!\033[0m") // Green bold
