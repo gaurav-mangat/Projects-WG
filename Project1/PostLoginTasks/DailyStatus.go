@@ -125,14 +125,15 @@ func viewDailyStatus() {
 
 func DailyStatusSection() {
 	for {
-		fmt.Println("\n")
+		fmt.Println()
+		fmt.Println()
 		fmt.Println("\033[1;36m---------------------------------------------\033[0m") // Sky blue
 		fmt.Println("\033[1;34m          DAILY STATUS SECTION             \033[0m")   // Blue
 		fmt.Println("\033[1;36m---------------------------------------------\033[0m")
 		fmt.Println()
 		fmt.Println("1. Add Daily Status")
 		fmt.Println("2. View Daily Status")
-		fmt.Println("3. Exit")
+		fmt.Println("3. Back to Dashboard")
 		fmt.Println()
 
 		var choice int

@@ -35,16 +35,16 @@ type UserTasks struct {
 
 // Defining the structure for Course list
 
-type Course1 struct {
-	Courses []struct {
-		ID      int    `json:"id"`
-		Title   string `json:"title"`
-		Lessons []struct {
-			ID    float32 `json:"id"`
-			Title string  `json:"title"`
-		} `json:"lessons"`
-	} `json:"courses"`
-}
+//type Course1 struct {
+//	Courses []struct {
+//		ID      int    `json:"id"`
+//		Title   string `json:"title"`
+//		Lessons []struct {
+//			ID    float32 `json:"id"`
+//			Title string  `json:"title"`
+//		} `json:"lessons"`
+//	} `json:"courses"`
+//}
 
 type Lesson struct {
 	ID    float64 `json:"id"`

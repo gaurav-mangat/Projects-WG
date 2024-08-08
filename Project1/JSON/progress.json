@@ -2,6 +2,10 @@
   {
     "username": "dushyant",
     "course_progress": {
+      "1": [
+        101.1,
+        101.2
+      ],
       "101": [
         101.1,
         101.2,
@@ -22,6 +26,7 @@
     },
     "overall_completion": 50,
     "course_completion": {
+      "1": 50,
       "101": 100,
       "202": 100,
       "303": 66.66666666666666,
@@ -49,5 +54,57 @@
       "303": 0,
       "404": 0
     }
+  },
+  {
+    "username": "alok11",
+    "course_progress": {
+      "101": [
+        101.1,
+        101.2,
+        101.3
+      ]
+    },
+    "overall_completion": 25,
+    "course_completion": {
+      "101": 100,
+      "202": 0,
+      "303": 0,
+      "404": 0
+    }
+  },
+  {
+    "username": "aarushi11",
+    "course_progress": {
+      "101": [
+        101.1,
+        101.2,
+        101.3
+      ]
+    },
+    "overall_completion": 25,
+    "course_completion": {
+      "101": 100,
+      "202": 0,
+      "303": 0,
+      "404": 0
+    }
+  },
+  {
+    "username": "newuser",
+    "course_progress": {},
+    "overall_completion": 0,
+    "course_completion": null
+  },
+  {
+    "username": "test_user",
+    "course_progress": {},
+    "overall_completion": 0,
+    "course_completion": null
+  },
+  {
+    "username": "testuser",
+    "course_progress": {},
+    "overall_completion": 0,
+    "course_completion": null
   }
 ]

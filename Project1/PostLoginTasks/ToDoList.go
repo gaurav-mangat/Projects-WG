@@ -2,6 +2,7 @@ package PostLoginTasks
 
 import (
 	"FileHandling/Config"
+	"FileHandling/models"
 	"FileHandling/utils"
 	"encoding/json"
 	"fmt"
@@ -9,20 +10,7 @@ import (
 	"strconv"
 )
 
-// Task struct for a single line task with an ID
-type Task struct {
-	ID        int    `json:"id"`
-	Title     string `json:"title"`
-	Completed bool   `json:"completed"`
-}
-
-// UserTasks struct to hold tasks for each user
-type UserTasks struct {
-	Username string `json:"username"`
-	Tasks    []Task `json:"tasks"`
-}
-
-var userTasks []UserTasks
+var userTasks []models.UserTasks
 
 const tasksFilename = "tasks.json"
 
@@ -31,7 +19,7 @@ func loadTasks() error {
 	file, err := os.ReadFile(Config.TaskFile)
 	if err != nil {
 		if os.IsNotExist(err) {
-			userTasks = []UserTasks{}
+			userTasks = []models.UserTasks{}
 			return nil
 		}
 		return err
@@ -49,7 +37,7 @@ func saveTasks() error {
 }
 
 // Generate a unique ID for a new task
-func generateTaskID(user UserTasks) int {
+func generateTaskID(user models.UserTasks) int {
 	var maxID int
 	for _, task := range user.Tasks {
 		if task.ID > maxID {
@@ -64,12 +52,12 @@ func generateTaskID(user UserTasks) int {
 func addTask() {
 	title := utils.ReadInput("Enter task: ")
 
-	var newTask Task
+	var newTask models.Task
 
 	// Find the user and generate a unique ID for the new task
 	for i, user := range userTasks {
 		if user.Username == ActiveUser.Username {
-			newTask = Task{
+			newTask = models.Task{
 				ID:        generateTaskID(user),
 				Title:     title,
 				Completed: false,
@@ -81,14 +69,14 @@ func addTask() {
 
 	// If user not found, create a new entry
 	if newTask.ID == 0 {
-		newTask = Task{
+		newTask = models.Task{
 			ID:        1,
 			Title:     title,
 			Completed: false,
 		}
-		userTasks = append(userTasks, UserTasks{
+		userTasks = append(userTasks, models.UserTasks{
 			Username: ActiveUser.Username,
-			Tasks:    []Task{newTask},
+			Tasks:    []models.Task{newTask},
 		})
 	}
 
@@ -184,7 +172,7 @@ func TaskManagementSection() {
 		fmt.Println("2. Mark Task as Complete")
 		fmt.Println("3. View Completed Tasks")
 		fmt.Println("4. View Uncompleted Tasks")
-		fmt.Println("5. Exit")
+		fmt.Println("5. Back to Dashboard")
 		fmt.Println()
 
 		var choice int

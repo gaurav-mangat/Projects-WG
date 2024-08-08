@@ -11,6 +11,7 @@ func Login() {
 	const filename = Config.UserFile
 
 	// Load users from the file once
+
 	if err := utils.LoadUsers(Config.UserFile); err != nil {
 		fmt.Printf("Error loading users: %v\n", err)
 		return
@@ -39,6 +40,7 @@ func Login() {
 		fmt.Println()
 
 		// Check credentials
+
 		loginSuccessful := false
 		for _, user := range utils.Users {
 			if user.Username == username && utils.CheckPasswordHash(password, user.PasswordHash) {

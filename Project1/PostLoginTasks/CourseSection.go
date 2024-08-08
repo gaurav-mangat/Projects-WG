@@ -54,8 +54,8 @@ func UpdateProgress(username string) {
 	}
 
 	// Load course details to show lessons
-	const filename = Config.CourseFile
-	data, err := os.ReadFile(filename)
+	//const filename = Config.CourseFile
+	data, err := os.ReadFile(Config.CourseFile)
 	if err != nil {
 		fmt.Printf("\033[1;31mError reading file: %v\033[0m\n", err)
 		return
@@ -188,8 +188,7 @@ func DisplayProgress(username string) {
 	}
 
 	// Load course details to show lesson titles
-	const filename = Config.CourseFile
-	data, err := os.ReadFile(filename)
+	data, err := os.ReadFile(Config.CourseFile)
 	if err != nil {
 		fmt.Printf("\033[1;31mError reading file: %v\033[0m\n", err)
 		return
@@ -258,10 +257,10 @@ func CourseProgress() {
 		fmt.Println("\033[1;36m---------------------------------------------\033[0m")
 		fmt.Println()
 
-		fmt.Println("\033[1;31m     Press 1 to See the Courses Assigned\033[0m")
-		fmt.Println("\033[1;31m     Press 2 to Display Progress\033[0m")
-		fmt.Println("\033[1;31m     Press 3 to Update the Progress\033[0m")
-		fmt.Println("\033[1;31m     Press 4 to Exit to Dashboard\033[0m") // Option to exit
+		fmt.Println("\033[1;32m     Press 1 to See the Courses Assigned\033[0m")
+		fmt.Println("\033[1;32m     Press 2 to Display Progress\033[0m")
+		fmt.Println("\033[1;32m     Press 3 to Update the Progress\033[0m")
+		fmt.Println("\033[1;32m     Press 4 to Exit to Dashboard\033[0m") // Option to exit
 
 		subChoiceStr := utils.ReadInput("\n     Enter your choice: ")
 		subChoice, err := strconv.Atoi(subChoiceStr)

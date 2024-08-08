@@ -17,6 +17,7 @@ func main() {
 		fmt.Println("\033[0m") // Reset color
 
 		// Menu options with borders and colors
+
 		fmt.Println("\033[1;32m") // Green bold
 		fmt.Println("-----------------------------")
 		fmt.Println("      Press 1 to Login")
@@ -30,6 +31,7 @@ func main() {
 		var choice int
 
 		// Prompt user for choice with color
+
 		fmt.Print("\033[1;34m     Enter your choice: \033[0m") // Blue bold
 		_, err := fmt.Scanln(&choice)
 		if err != nil {

@@ -109,3 +109,8 @@ func CheckPasswordHash(password, hash string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	return err == nil
 }
+
+func IsValidMobileNumber(number string) bool {
+	match, _ := regexp.MatchString(`^[6-9]\d{9}$`, number)
+	return match
+}

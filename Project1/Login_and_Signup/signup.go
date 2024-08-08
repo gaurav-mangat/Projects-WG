@@ -5,7 +5,6 @@ import (
 	"FileHandling/models"
 	"FileHandling/utils"
 	"fmt"
-	"regexp"
 )
 
 // Sign up a new user
@@ -65,7 +64,7 @@ func SignUp() {
 	valid = false
 	for !valid {
 		mobileNumber = utils.ReadInput("\033[1;34m\nEnter mobile number: \033[0m")
-		if utils.IsValidInput(mobileNumber) && isValidMobileNumber(mobileNumber) {
+		if utils.IsValidInput(mobileNumber) && utils.IsValidMobileNumber(mobileNumber) {
 			valid = true
 		} else {
 			fmt.Println("\033[1;31m\nInvalid mobile number.\nPlease enter a 10-digit number starting with 6, 7, 8, or 9.\033[0m")
@@ -120,10 +119,4 @@ func SignUp() {
 			fmt.Println("\033[1;31mInvalid choice\033[0m") // Red bold
 		}
 	}
-}
-
-// Function to validate mobile number
-func isValidMobileNumber(number string) bool {
-	match, _ := regexp.MatchString(`^[6-9]\d{9}$`, number)
-	return match
 }

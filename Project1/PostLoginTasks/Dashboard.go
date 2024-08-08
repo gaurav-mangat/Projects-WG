@@ -22,7 +22,7 @@ func Dashboard(activeUser models.User) {
 		fmt.Println() //
 		fmt.Println("\033[1;34m     4. Your Profile\033[0m")
 		fmt.Println()
-		fmt.Println("\033[1;34m     5. To Exit\033[0m")
+		fmt.Println("\033[1;34m     5. Exit\033[0m")
 		fmt.Println()
 
 		var choice int

@@ -96,5 +96,19 @@
         "full_name": "Divya Gupta",
         "mobile_number": "9876567890",
         "gender": "Female"
+    },
+    {
+        "username": "alok11",
+        "password_hash": "$2a$10$N551KK4lXr1zEnfYG5MHi.zlCcuxuasLiYAEts26JHDytPaahy5se",
+        "full_name": "Alok Raturi",
+        "mobile_number": "6396098067",
+        "gender": "Male"
+    },
+    {
+        "username": "aarushi11",
+        "password_hash": "$2a$10$qGBtoPP5MozJ4mLjpnOw7eAVIeuAJbvaKPywkno5.1wdnDIPmyCxm",
+        "full_name": "Aarushi Singhal",
+        "mobile_number": "9416329683",
+        "gender": "Female"
     }
 ]
